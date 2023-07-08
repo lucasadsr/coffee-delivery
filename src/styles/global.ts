@@ -14,6 +14,12 @@ export const GlobalStyle = createGlobalStyle`
     border-radius: 2px;
   }
 
+  button {
+    cursor: pointer;
+    border: none;
+    background: none;
+  }
+
   body {
     background: ${(props) => props.theme.colors['gray-100']};
     
