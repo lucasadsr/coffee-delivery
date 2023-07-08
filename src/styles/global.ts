@@ -19,6 +19,7 @@ export const GlobalStyle = createGlobalStyle`
     
     font-weight: 400;
     font-size: 1rem;
+    font-family: ${(props) => props.theme.fontFamily.roboto};
 
     line-height: 1.3;
 
