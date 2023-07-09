@@ -80,12 +80,21 @@ export const CoffeeCardContainer = styled.div`
 
     svg {
       color: ${(props) => props.theme.colors['purple-500']};
+
+      &:hover {
+        color: ${(props) => props.theme.colors['purple-900']};
+      }
     }
 
     .cart {
       padding: 0.5rem;
       background: ${(props) => props.theme.colors['purple-900']};
       border-radius: 0.375rem;
+      transition: background 100ms;
+    }
+
+    .cart:hover {
+      background-color: ${(props) => props.theme.colors['purple-500']};
     }
 
     .cart svg {
