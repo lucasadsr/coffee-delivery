@@ -54,6 +54,7 @@ export const CoffeeCardContainer = styled.div`
   .buy {
     display: flex;
     align-items: center;
+    gap: 0.5rem;
 
     p {
       color: ${(props) => props.theme.colors['gray-700']};
@@ -65,25 +66,6 @@ export const CoffeeCardContainer = styled.div`
       font-weight: 700;
       font-size: ${(props) => props.theme.fontSize.baloo.m}rem;
       margin-right: 1.44rem;
-    }
-
-    .quantity {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      width: 4.5rem;
-      padding: 0.5rem;
-      border-radius: 0.375rem;
-      background: ${(props) => props.theme.colors['gray-400']};
-      margin-right: 0.5rem;
-    }
-
-    svg {
-      color: ${(props) => props.theme.colors['purple-500']};
-
-      &:hover {
-        color: ${(props) => props.theme.colors['purple-900']};
-      }
     }
 
     .cart {

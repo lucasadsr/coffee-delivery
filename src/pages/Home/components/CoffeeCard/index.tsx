@@ -1,16 +1,14 @@
-import { Minus, Plus, ShoppingCart } from 'phosphor-react'
+import { ShoppingCart } from 'phosphor-react'
 import { Coffee } from '../../../../assets/coffees/coffees'
 import { CoffeeCardContainer } from './styles'
+import { CoffeeQuantity } from '../../../../components/CoffeeQuantity'
+import { formatPrice } from '../../../../utils/formatPrice'
 
 interface CoffeeCardProps {
   coffee: Coffee
 }
 
 export function CoffeeCard({ coffee }: CoffeeCardProps) {
-  const real = new Intl.NumberFormat('pt-BR', {
-    minimumFractionDigits: 2,
-  })
-
   return (
     <CoffeeCardContainer>
       <img src={coffee.image} alt={coffee.name} />
@@ -25,17 +23,9 @@ export function CoffeeCard({ coffee }: CoffeeCardProps) {
       <p className="coffeeDescription">{coffee.description}</p>
       <div className="buy">
         <p>
-          R$ <span className="price">{real.format(coffee.price)}</span>
+          R$ <span className="price">{formatPrice(coffee.price)}</span>
         </p>
-        <div className="quantity">
-          <button>
-            <Minus />
-          </button>
-          <span>{coffee.quantity}</span>
-          <button>
-            <Plus />
-          </button>
-        </div>
+        <CoffeeQuantity coffee={coffee} />
         <button className="cart">
           <ShoppingCart weight="fill" size={22} />
         </button>
