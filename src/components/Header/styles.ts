@@ -28,6 +28,10 @@ export const HeaderContainer = styled.header`
       display: flex;
       gap: 0.25rem;
 
+      svg {
+        color: ${(props) => props.theme.colors['purple-500']};
+      }
+
       p {
         font-family: ${(props) => props.theme.fontFamily.roboto};
         font-size: ${(props) => props.theme.fontSize.roboto.button_g}rem;
