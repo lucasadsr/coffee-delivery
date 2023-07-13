@@ -1,14 +1,31 @@
-import { Trash } from 'phosphor-react'
+import { Minus, Plus, Trash } from 'phosphor-react'
 import { Coffee } from '../../../../assets/coffees/coffees'
-import { CoffeeQuantity } from '../../../../components/CoffeeQuantity'
 import { BorderLine, CoffeeCardContainer, RemoveButton } from './styles'
 import { formatPrice } from '../../../../utils/formatPrice'
+import { CoffeeQuantityContainer } from '../../../../components/CoffeeQuantity/styles'
+import { useContext } from 'react'
+import { CartContext } from '../../../../contexts/CartContext'
 
 interface CoffeeCardProps {
   coffee: Coffee
 }
 
 export function CoffeeCard({ coffee }: CoffeeCardProps) {
+  const { addItemToCart, removeCoffeeUnit, removeCoffee } =
+    useContext(CartContext)
+
+  function handleAddToCart() {
+    addItemToCart(coffee, 1)
+  }
+
+  function handleRemoveCoffeeUnit() {
+    removeCoffeeUnit(coffee)
+  }
+
+  function handleRemoveCoffee() {
+    removeCoffee(coffee)
+  }
+
   return (
     <div>
       <CoffeeCardContainer>
@@ -17,8 +34,16 @@ export function CoffeeCard({ coffee }: CoffeeCardProps) {
           <div>
             <p>{coffee.name}</p>
             <div className="actions">
-              <CoffeeQuantity coffee={coffee} />
-              <RemoveButton>
+              <CoffeeQuantityContainer>
+                <button>
+                  <Minus onClick={handleRemoveCoffeeUnit} />
+                </button>
+                <span>{coffee.quantity}</span>
+                <button>
+                  <Plus onClick={handleAddToCart} />
+                </button>
+              </CoffeeQuantityContainer>
+              <RemoveButton onClick={handleRemoveCoffee}>
                 <Trash size={16} />
                 <p>Remover</p>
               </RemoveButton>

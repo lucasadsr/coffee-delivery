@@ -41,6 +41,24 @@ export const HeaderContainer = styled.header`
     .cart {
       color: ${(props) => props.theme.colors['yellow-900']};
       background: ${(props) => props.theme.colors['yellow-100']};
+      position: relative;
+
+      span {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        position: absolute;
+        top: -8px;
+        right: -8px;
+        text-decoration: none;
+        font-size: ${(props) => props.theme.fontSize.roboto.xs}rem;
+        color: white;
+        font-weight: 700;
+        background-color: ${(props) => props.theme.colors['yellow-900']};
+        border-radius: 999px;
+        width: 1.25rem;
+        height: 1.25rem;
+      }
     }
   }
 `
