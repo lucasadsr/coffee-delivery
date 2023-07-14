@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import {
   Bank,
   CreditCard,
@@ -23,13 +24,20 @@ import { formatPrice } from '../../utils/formatPrice'
 import { useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
 import * as zod from 'zod'
-import { useContext } from 'react'
+import { useContext, useState } from 'react'
 import { CartContext } from '../../contexts/CartContext'
+
+enum PaymentMethods {
+  credit = 'credit',
+  debit = 'debit',
+  money = 'money',
+  undefined = 'undefined',
+}
 
 const newOrderFormValidarionSchema = zod.object({
   cep: zod.string().length(8, 'Informe o CEP'),
-  rua: zod.string().min(1, 'Informe a Rua'),
-  numero: zod.number().min(1, 'Informe o número'),
+  rua: zod.string().min(1, 'Informe a rua'),
+  numero: zod.string().min(1, 'Informe o número'),
   complemento: zod.string().optional(),
   bairro: zod.string().min(1, 'Informe o bairro'),
   cidade: zod.string().min(1, 'Informe a cidade'),
@@ -38,13 +46,38 @@ const newOrderFormValidarionSchema = zod.object({
 
 type newOrderData = zod.infer<typeof newOrderFormValidarionSchema>
 
+interface ErrorsType {
+  errors: {
+    [key: string]: {
+      message: string
+    }
+  }
+}
+
 export function Checkout() {
-  const { register, handleSubmit } = useForm<newOrderData>({
+  const { register, handleSubmit, formState } = useForm<newOrderData>({
     resolver: zodResolver(newOrderFormValidarionSchema),
   })
 
+  const { errors } = formState as ErrorsType
+
+  const [selectedPaymentMethod, setSelectedPaymentMethod] =
+    useState<PaymentMethods>(PaymentMethods.undefined)
+
+  function togglePaymentMethod(type: PaymentMethods) {
+    setSelectedPaymentMethod(type)
+  }
+
+  const errorsArray = Object.values(errors)
+
+  if (selectedPaymentMethod === PaymentMethods.undefined) {
+    errorsArray.push({ message: 'Informe um método de pagamento' })
+  }
+
   function handleNewOrder(data: newOrderData) {
-    console.log(data)
+    if (selectedPaymentMethod !== PaymentMethods.undefined) {
+      console.log(data, { payment: selectedPaymentMethod })
+    }
   }
 
   const { cart } = useContext(CartContext)
@@ -82,7 +115,7 @@ export function Checkout() {
               <InputContainer
                 placeholder="Número"
                 width="12.5rem"
-                {...register('numero', { valueAsNumber: true })}
+                {...register('numero')}
               />
               <InputContainer
                 placeholder="Complemento"
@@ -116,15 +149,30 @@ export function Checkout() {
               O pagamento é feito na entrega. Escolha a forma que deseja pagar
             </Subtitle>
             <ButtonsList>
-              <ButtonContainer type="button" className="method">
+              <ButtonContainer
+                type="button"
+                className="method"
+                selected={selectedPaymentMethod === PaymentMethods.credit}
+                onClick={() => togglePaymentMethod(PaymentMethods.credit)}
+              >
                 <CreditCard size={16} />
                 <p>Cartão de crédito</p>
               </ButtonContainer>
-              <ButtonContainer type="button" className="method">
+              <ButtonContainer
+                type="button"
+                className="method"
+                selected={selectedPaymentMethod === PaymentMethods.debit}
+                onClick={() => togglePaymentMethod(PaymentMethods.debit)}
+              >
                 <Bank size={16} />
                 <p>cartão de débito</p>
               </ButtonContainer>
-              <ButtonContainer type="button" className="method">
+              <ButtonContainer
+                type="button"
+                className="method"
+                selected={selectedPaymentMethod === PaymentMethods.money}
+                onClick={() => togglePaymentMethod(PaymentMethods.money)}
+              >
                 <Money size={16} />
                 <p>dinheiro</p>
               </ButtonContainer>
@@ -153,6 +201,7 @@ export function Checkout() {
             <button onClick={handleSubmit(handleNewOrder)}>
               Confirmar o pedido
             </button>
+            <span>{errorsArray.length > 0 ? errorsArray[0].message : ''}</span>
           </Summary>
         </OrderResumeContainer>
       </SelectedCoffees>

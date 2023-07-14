@@ -1,7 +1,11 @@
-import { styled } from 'styled-components'
+import { css, styled } from 'styled-components'
 
 interface InputContainerProps {
   width: string
+}
+
+interface ButtonContainerProps {
+  selected: boolean
 }
 
 export const CheckoutSection = styled.section`
@@ -86,9 +90,9 @@ export const ButtonsList = styled.div`
   gap: 0.75rem;
 `
 
-export const ButtonContainer = styled.button`
+export const ButtonContainer = styled.button<ButtonContainerProps>`
   display: flex;
-  padding: 1rem 0.8rem;
+  padding: 0.9rem 0.7rem;
   align-items: center;
   gap: 0.6rem;
   border-radius: 0.375rem;
@@ -98,6 +102,16 @@ export const ButtonContainer = styled.button`
   font-size: ${(props) => props.theme.fontSize.roboto.button_m}rem;
   color: ${(props) => props.theme.colors['gray-700']};
   text-transform: uppercase;
+
+  ${(props) =>
+    props.selected
+      ? css`
+          background-color: ${props.theme.colors['purple-100']};
+          border: 1px solid ${props.theme.colors['purple-900']};
+          box-shadow: none;
+          outline: none;
+        `
+      : ''}
 `
 
 export const SelectedCoffees = styled.div`
