@@ -35,11 +35,11 @@ export function CoffeeCard({ coffee }: CoffeeCardProps) {
             <p>{coffee.name}</p>
             <div className="actions">
               <CoffeeQuantityContainer>
-                <button>
+                <button type="button">
                   <Minus onClick={handleRemoveCoffeeUnit} />
                 </button>
                 <span>{coffee.quantity}</span>
-                <button>
+                <button type="button">
                   <Plus onClick={handleAddToCart} />
                 </button>
               </CoffeeQuantityContainer>

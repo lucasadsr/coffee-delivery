@@ -26,6 +26,7 @@ import { zodResolver } from '@hookform/resolvers/zod'
 import * as zod from 'zod'
 import { useContext, useState } from 'react'
 import { CartContext } from '../../contexts/CartContext'
+import { useNavigate } from 'react-router-dom'
 
 enum PaymentMethods {
   credit = 'credit',
@@ -34,8 +35,8 @@ enum PaymentMethods {
   undefined = 'undefined',
 }
 
-const newOrderFormValidarionSchema = zod.object({
-  cep: zod.string().length(8, 'Informe o CEP'),
+const newOrderFormValidationSchema = zod.object({
+  cep: zod.string().length(8, 'Informe o CEP (Apenas números)'),
   rua: zod.string().min(1, 'Informe a rua'),
   numero: zod.string().min(1, 'Informe o número'),
   complemento: zod.string().optional(),
@@ -44,7 +45,9 @@ const newOrderFormValidarionSchema = zod.object({
   uf: zod.string().length(2, 'Informe a UF'),
 })
 
-type newOrderData = zod.infer<typeof newOrderFormValidarionSchema>
+type newOrderData = zod.infer<typeof newOrderFormValidationSchema>
+
+export const addressType = typeof newOrderFormValidationSchema
 
 interface ErrorsType {
   errors: {
@@ -55,8 +58,11 @@ interface ErrorsType {
 }
 
 export function Checkout() {
+  const { cart, saveAddressStatus, savePaymentMethod, clearCart } =
+    useContext(CartContext)
+
   const { register, handleSubmit, formState } = useForm<newOrderData>({
-    resolver: zodResolver(newOrderFormValidarionSchema),
+    resolver: zodResolver(newOrderFormValidationSchema),
   })
 
   const { errors } = formState as ErrorsType
@@ -74,13 +80,23 @@ export function Checkout() {
     errorsArray.push({ message: 'Informe um método de pagamento' })
   }
 
+  if (cart.length === 0) {
+    errorsArray.push({
+      message: 'Seu carrinho está vazio. Adicione pelo menos um item',
+    })
+  }
+
+  const navigate = useNavigate()
+
   function handleNewOrder(data: newOrderData) {
-    if (selectedPaymentMethod !== PaymentMethods.undefined) {
+    if (selectedPaymentMethod !== PaymentMethods.undefined && cart.length > 0) {
+      saveAddressStatus(data)
+      savePaymentMethod(selectedPaymentMethod)
+      clearCart()
+      navigate('/success')
       console.log(data, { payment: selectedPaymentMethod })
     }
   }
-
-  const { cart } = useContext(CartContext)
 
   const totalItemsValue = cart.reduce((accumulator, currentItem) => {
     const itemValue = currentItem.price * currentItem.quantity
@@ -89,9 +105,9 @@ export function Checkout() {
 
   return (
     <CheckoutSection>
-      <PurchaseInfoContainer>
-        <h3>Complete seu pedido</h3>
-        <form onSubmit={handleSubmit(handleNewOrder)}>
+      <form onSubmit={handleSubmit(handleNewOrder)}>
+        <PurchaseInfoContainer>
+          <h3>Complete seu pedido</h3>
           <div className="box">
             <Title>
               <MapPinLine size={22} />
@@ -141,7 +157,7 @@ export function Checkout() {
           </div>
 
           <div className="box payment">
-            <Title className="title">
+            <Title>
               <CurrencyDollar size={22} />
               Pagamento
             </Title>
@@ -151,7 +167,6 @@ export function Checkout() {
             <ButtonsList>
               <ButtonContainer
                 type="button"
-                className="method"
                 selected={selectedPaymentMethod === PaymentMethods.credit}
                 onClick={() => togglePaymentMethod(PaymentMethods.credit)}
               >
@@ -160,7 +175,6 @@ export function Checkout() {
               </ButtonContainer>
               <ButtonContainer
                 type="button"
-                className="method"
                 selected={selectedPaymentMethod === PaymentMethods.debit}
                 onClick={() => togglePaymentMethod(PaymentMethods.debit)}
               >
@@ -169,7 +183,6 @@ export function Checkout() {
               </ButtonContainer>
               <ButtonContainer
                 type="button"
-                className="method"
                 selected={selectedPaymentMethod === PaymentMethods.money}
                 onClick={() => togglePaymentMethod(PaymentMethods.money)}
               >
@@ -178,33 +191,35 @@ export function Checkout() {
               </ButtonContainer>
             </ButtonsList>
           </div>
-        </form>
-      </PurchaseInfoContainer>
+        </PurchaseInfoContainer>
 
-      <SelectedCoffees>
-        <h3>Cafés selecionados</h3>
-        <OrderResumeContainer>
-          {cart.map((coffee) => (
-            <CoffeeCard key={coffee.id} coffee={coffee} />
-          ))}
-          <Summary>
-            <p>
-              Total dos itens <span>R$ {formatPrice(totalItemsValue)}</span>
-            </p>
-            <p>
-              Entrega <span>R$ {formatPrice(3.9)}</span>
-            </p>
-            <p>
-              Total <span>R$ {formatPrice(totalItemsValue + 3.9)}</span>
-            </p>
+        <SelectedCoffees>
+          <h3>Cafés selecionados</h3>
+          <OrderResumeContainer>
+            {cart.map((coffee) => (
+              <CoffeeCard key={coffee.id} coffee={coffee} />
+            ))}
+            <Summary>
+              <p>
+                Total dos itens <span>R$ {formatPrice(totalItemsValue)}</span>
+              </p>
+              <p>
+                Entrega <span>R$ {formatPrice(3.9)}</span>
+              </p>
+              <p>
+                Total <span>R$ {formatPrice(totalItemsValue + 3.9)}</span>
+              </p>
 
-            <button onClick={handleSubmit(handleNewOrder)}>
-              Confirmar o pedido
-            </button>
-            <span>{errorsArray.length > 0 ? errorsArray[0].message : ''}</span>
-          </Summary>
-        </OrderResumeContainer>
-      </SelectedCoffees>
+              <button onClick={handleSubmit(handleNewOrder)}>
+                Confirmar o pedido
+              </button>
+              <span>
+                {errorsArray.length > 0 ? errorsArray[0].message : ''}
+              </span>
+            </Summary>
+          </OrderResumeContainer>
+        </SelectedCoffees>
+      </form>
     </CheckoutSection>
   )
 }

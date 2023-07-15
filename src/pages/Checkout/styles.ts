@@ -9,10 +9,6 @@ interface ButtonContainerProps {
 }
 
 export const CheckoutSection = styled.section`
-  display: flex;
-  justify-content: space-between;
-  gap: 2rem;
-
   h3 {
     margin-top: 2.5rem;
     margin-bottom: 0.94rem;
@@ -21,10 +17,12 @@ export const CheckoutSection = styled.section`
     font-size: ${(props) => props.theme.fontSize.baloo.xs}rem;
     font-weight: 700;
   }
-`
 
-export const PurchaseInfoContainer = styled.div`
   form {
+    display: flex;
+    justify-content: space-between;
+    gap: 2rem;
+
     .box {
       padding: 2.5rem;
       border-radius: 0.375rem;
@@ -41,6 +39,8 @@ export const PurchaseInfoContainer = styled.div`
     }
   }
 `
+
+export const PurchaseInfoContainer = styled.div``
 
 export const InputContainer = styled.input<InputContainerProps>`
   width: ${(props) => props.width};
@@ -102,6 +102,11 @@ export const ButtonContainer = styled.button<ButtonContainerProps>`
   font-size: ${(props) => props.theme.fontSize.roboto.button_m}rem;
   color: ${(props) => props.theme.colors['gray-700']};
   text-transform: uppercase;
+  transition: background 100ms;
+
+  &:hover {
+    background-color: ${(props) => props.theme.colors['gray-500']};
+  }
 
   ${(props) =>
     props.selected
