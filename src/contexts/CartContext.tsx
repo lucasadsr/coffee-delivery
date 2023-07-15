@@ -33,11 +33,11 @@ interface CartContextType {
 const initialAddressState: Address = {
   bairro: '',
   cep: '',
-  cidade: '',
+  cidade: 'Recife',
   complemento: '',
   numero: '',
   rua: '',
-  uf: '',
+  uf: 'PE',
 }
 
 export const CartContext = createContext({} as CartContextType)
