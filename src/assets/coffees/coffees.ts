@@ -24,7 +24,7 @@ export const coffees: Coffee[] = [
     description: 'O tradicional café feito com água quente e grãos moídos',
     price: 9.9,
     tags: [tags.tradicional],
-    image: '/src/assets/coffees/images/expresso.png',
+    image: '../../../src/assets/coffees/images/expresso.png',
     quantity: 1,
   },
   {
@@ -33,7 +33,7 @@ export const coffees: Coffee[] = [
     description: 'Expresso diluído, menos intenso que o tradicional',
     price: 9.9,
     tags: [tags.tradicional],
-    image: '/src/assets/coffees/images/americano.png',
+    image: '../../../src/assets/coffees/images/americano.png',
     quantity: 1,
   },
   {
@@ -42,7 +42,7 @@ export const coffees: Coffee[] = [
     description: 'Café expresso tradicional com espuma cremosa',
     price: 9.9,
     tags: [tags.tradicional],
-    image: '/src/assets/coffees/images/expresso-cremoso.png',
+    image: '../../../src/assets/coffees/images/expresso-cremoso.png',
     quantity: 1,
   },
   {
@@ -51,7 +51,7 @@ export const coffees: Coffee[] = [
     description: 'Bebida preparada com café expresso e cubos de gelo',
     price: 9.9,
     tags: [tags.tradicional, tags.gelado],
-    image: '/src/assets/coffees/images/cafe-gelado.png',
+    image: '../../../src/assets/coffees/images/cafe-gelado.png',
     quantity: 1,
   },
   {
@@ -60,7 +60,7 @@ export const coffees: Coffee[] = [
     description: 'Meio a meio de expresso tradicional com leite vaporizado',
     price: 9.9,
     tags: [tags.tradicional, tags.comLeite],
-    image: '/src/assets/coffees/images/cafe-com-leite.png',
+    image: '../../../src/assets/coffees/images/cafe-com-leite.png',
     quantity: 1,
   },
   {
@@ -70,7 +70,7 @@ export const coffees: Coffee[] = [
       'Uma dose de café expresso com o dobro de leite e espuma cremosa',
     price: 9.9,
     tags: [tags.tradicional, tags.comLeite],
-    image: '/src/assets/coffees/images/latte.png',
+    image: '../../../src/assets/coffees/images/latte.png',
     quantity: 1,
   },
   {
@@ -80,7 +80,7 @@ export const coffees: Coffee[] = [
       'Bebida com canela feita de doses iguais de café, leite e espuma',
     price: 9.9,
     tags: [tags.tradicional, tags.comLeite],
-    image: '/src/assets/coffees/images/capuccino.png',
+    image: '../../../src/assets/coffees/images/capuccino.png',
     quantity: 1,
   },
   {
@@ -90,7 +90,7 @@ export const coffees: Coffee[] = [
       'Café expresso misturado com um pouco de leite quente e espuma',
     price: 9.9,
     tags: [tags.tradicional, tags.comLeite],
-    image: '/src/assets/coffees/images/macchiato.png',
+    image: '../../../src/assets/coffees/images/macchiato.png',
     quantity: 1,
   },
   {
@@ -99,7 +99,7 @@ export const coffees: Coffee[] = [
     description: 'Café expresso com calda de chocolate, pouco leite e espuma',
     price: 9.9,
     tags: [tags.tradicional, tags.comLeite],
-    image: '/src/assets/coffees/images/mochaccino.png',
+    image: '../../../src/assets/coffees/images/mochaccino.png',
     quantity: 1,
   },
   {
@@ -108,7 +108,7 @@ export const coffees: Coffee[] = [
     description: 'Bebida feita com chocolate dissolvido no leite quente e café',
     price: 9.9,
     tags: [tags.especial, tags.comLeite],
-    image: '/src/assets/coffees/images/chocolate-quente.png',
+    image: '../../../src/assets/coffees/images/chocolate-quente.png',
     quantity: 1,
   },
   {
@@ -118,7 +118,7 @@ export const coffees: Coffee[] = [
       'Drink gelado de café expresso com rum, creme de leite e hortelã',
     price: 9.9,
     tags: [tags.especial, tags.acoolico, tags.gelado],
-    image: '/src/assets/coffees/images/cubano.png',
+    image: '../../../src/assets/coffees/images/cubano.png',
     quantity: 1,
   },
   {
@@ -127,7 +127,7 @@ export const coffees: Coffee[] = [
     description: 'Bebida adocicada preparada com café e leite de coco',
     price: 9.9,
     tags: [tags.especial],
-    image: '/src/assets/coffees/images/havaiano.png',
+    image: '../../../src/assets/coffees/images/havaiano.png',
     quantity: 1,
   },
   {
@@ -136,7 +136,7 @@ export const coffees: Coffee[] = [
     description: 'Bebida preparada com grãos de café árabe e especiarias',
     price: 9.9,
     tags: [tags.especial],
-    image: '/src/assets/coffees/images/arabe.png',
+    image: '../../../src/assets/coffees/images/arabe.png',
     quantity: 1,
   },
   {
@@ -145,7 +145,7 @@ export const coffees: Coffee[] = [
     description: 'Bebida a base de café, uísque irlandês, açúcar e chantilly',
     price: 9.9,
     tags: [tags.especial, tags.acoolico],
-    image: '/src/assets/coffees/images/arabe.png',
+    image: '../../../src/assets/coffees/images/arabe.png',
     quantity: 1,
   },
 ]
