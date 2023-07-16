@@ -1,4 +1,8 @@
 <h1 align="center">Coffee Delivery ☕️</h1>
+<p align="center">
+  <img align="center" src="./public/mockup.png" width="500px" />
+</p>
+
 
 Coffee Delivery é um e-commerce de cafés onde os usuários podem explorar diferentes tipos de café, adicionar itens ao carrinho e fazer pedidos. Este projeto foi desenvolvido utilizando as tecnologias Vite, React, Styled Components, React Router DOM e Context API.
 
