@@ -38,7 +38,7 @@ enum PaymentMethods {
 const newOrderFormValidationSchema = zod.object({
   cep: zod.string().length(8, 'Informe o CEP (Apenas números)'),
   rua: zod.string().min(1, 'Informe a rua'),
-  numero: zod.string().min(1, 'Informe o número'),
+  numero: zod.number({ invalid_type_error: 'Informe um número válido' }),
   complemento: zod.string().optional(),
   bairro: zod.string().min(1, 'Informe o bairro'),
   cidade: zod.string().min(1, 'Informe a cidade'),
@@ -46,8 +46,6 @@ const newOrderFormValidationSchema = zod.object({
 })
 
 type newOrderData = zod.infer<typeof newOrderFormValidationSchema>
-
-export const addressType = typeof newOrderFormValidationSchema
 
 interface ErrorsType {
   errors: {
@@ -120,7 +118,6 @@ export function Checkout() {
               <InputContainer
                 placeholder="CEP"
                 width="12.5rem"
-                required
                 {...register('cep')}
               />
               <InputContainer
@@ -131,7 +128,7 @@ export function Checkout() {
               <InputContainer
                 placeholder="Número"
                 width="12.5rem"
-                {...register('numero')}
+                {...register('numero', { valueAsNumber: true })}
               />
               <InputContainer
                 placeholder="Complemento"

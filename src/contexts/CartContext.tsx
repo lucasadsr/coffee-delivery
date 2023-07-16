@@ -11,7 +11,7 @@ export type PaymentMethod = 'credit' | 'debit' | 'money' | undefined
 interface Address {
   cep: string
   rua: string
-  numero: string
+  numero: number
   complemento?: string
   bairro: string
   cidade: string
@@ -35,7 +35,7 @@ const initialAddressState: Address = {
   cep: '',
   cidade: 'Recife',
   complemento: '',
-  numero: '',
+  numero: 0,
   rua: '',
   uf: 'PE',
 }
@@ -131,7 +131,7 @@ export function CartContextProvider({ children }: CartContextProviderProps) {
       complemento: address.complemento,
       numero: address.numero,
       rua: address.rua,
-      uf: address.uf,
+      uf: address.uf.toUpperCase(),
     })
   }
 
