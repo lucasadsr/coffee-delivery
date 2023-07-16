@@ -18,7 +18,7 @@ export const Icon = styled.span<IconProps>`
 export const HeroContainer = styled.section`
   display: flex;
   justify-content: space-between;
-  gap: 3.5rem;
+  gap: 2.5rem;
   min-height: 34rem;
   padding: 4rem 0;
 
