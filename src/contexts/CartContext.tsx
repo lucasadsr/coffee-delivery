@@ -1,5 +1,5 @@
 /* eslint-disable no-unused-vars */
-import { ReactNode, createContext, useState } from 'react'
+import { ReactNode, createContext, useEffect, useState } from 'react'
 import { Coffee } from '../assets/coffees/coffees'
 
 interface CartContextProviderProps {
@@ -42,9 +42,28 @@ const initialAddressState: Address = {
 
 export const CartContext = createContext({} as CartContextType)
 
+const COFFEE_ITEMS_STORAGE_KEY = '@coffee-delivery:cart'
+const ADDRESS_STORAGE_KEY = '@coffee-delivery:address'
+
 export function CartContextProvider({ children }: CartContextProviderProps) {
-  const [cart, setCart] = useState<Coffee[]>([])
-  const [address, setAddress] = useState<Address>(initialAddressState)
+  const [cart, setCart] = useState<Coffee[]>(() => {
+    const storedCart = localStorage.getItem(COFFEE_ITEMS_STORAGE_KEY)
+
+    if (storedCart) {
+      return JSON.parse(storedCart)
+    }
+
+    return []
+  })
+  const [address, setAddress] = useState<Address>(() => {
+    const storedAddress = localStorage.getItem(ADDRESS_STORAGE_KEY)
+
+    if (storedAddress) {
+      return JSON.parse(storedAddress)
+    }
+
+    return initialAddressState
+  })
   const [paymentMethod, setPaymentMethod] = useState<PaymentMethod>(undefined)
 
   function addItemToCart(coffee: Coffee, quantity: number) {
@@ -66,8 +85,6 @@ export function CartContextProvider({ children }: CartContextProviderProps) {
     } else {
       setCart((state) => [...state, { ...coffee, quantity }])
     }
-
-    console.log(cart)
   }
 
   function removeCoffeeUnit(coffee: Coffee) {
@@ -125,6 +142,14 @@ export function CartContextProvider({ children }: CartContextProviderProps) {
   function clearCart() {
     setCart([])
   }
+
+  useEffect(() => {
+    localStorage.setItem(COFFEE_ITEMS_STORAGE_KEY, JSON.stringify(cart))
+  }, [cart])
+
+  useEffect(() => {
+    localStorage.setItem(ADDRESS_STORAGE_KEY, JSON.stringify(address))
+  }, [address])
 
   return (
     <CartContext.Provider
