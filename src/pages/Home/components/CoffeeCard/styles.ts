@@ -84,7 +84,7 @@ export const CoffeeCardContainer = styled.div`
     }
   }
 
-  @media screen and (max-width: 1000px) {
+  @media screen and (max-width: 1024px) {
     margin: 0 auto;
   }
 `
