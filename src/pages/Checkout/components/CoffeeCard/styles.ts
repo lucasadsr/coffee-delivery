@@ -7,6 +7,10 @@ export const CoffeeCardContainer = styled.div`
   img {
     width: 4rem;
     height: 4rem;
+
+    @media screen and (max-width: 1024px) {
+      height: 3.875rem;
+    }
   }
 
   .infos {

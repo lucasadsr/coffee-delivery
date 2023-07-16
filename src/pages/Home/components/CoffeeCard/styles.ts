@@ -83,4 +83,8 @@ export const CoffeeCardContainer = styled.div`
       color: white;
     }
   }
+
+  @media screen and (max-width: 1000px) {
+    margin: 0 auto;
+  }
 `

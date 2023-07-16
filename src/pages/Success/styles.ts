@@ -13,6 +13,16 @@ export const SuccessContainer = styled.section`
   img {
     height: 18.31rem;
   }
+
+  @media screen and (max-width: 1024px) {
+    margin-top: 2rem;
+    flex-direction: column;
+    gap: 3rem;
+
+    img {
+      height: 13.75rem;
+    }
+  }
 `
 
 export const Title = styled.h3`
@@ -36,6 +46,11 @@ export const DeliveryInfosContainer = styled.div`
   width: 32.875rem;
   border: 1px solid ${(props) => props.theme.colors['yellow-500']};
   margin-top: 2.5rem;
+
+  @media screen and (max-width: 1024px) {
+    padding: 1rem;
+    width: 100%;
+  }
 `
 
 export const InfoContainer = styled.div<InfoProps>`

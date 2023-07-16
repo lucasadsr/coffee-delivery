@@ -7,7 +7,7 @@ interface IconProps {
 export const Icon = styled.span<IconProps>`
   background: ${(props) => props.$background};
   padding: 0.5rem;
-  border-radius: 1000px;
+  border-radius: 1024px;
   height: 2rem;
 
   svg {
@@ -78,5 +78,34 @@ export const HeroContainer = styled.section`
 
   img {
     height: 22.5rem;
+  }
+
+  @media screen and (max-width: 1024px) {
+    flex-direction: column;
+    padding: 2rem 0;
+
+    img {
+      height: 17.5rem;
+      width: fit-content;
+      margin: 0 auto;
+    }
+
+    .titles {
+      width: 100%;
+
+      p {
+        width: 100%;
+      }
+    }
+
+    .topics {
+      width: 100%;
+      flex-direction: column;
+      gap: 1.25rem;
+
+      p {
+        width: 100%;
+      }
+    }
   }
 `

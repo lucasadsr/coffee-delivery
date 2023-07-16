@@ -37,6 +37,21 @@ export const CheckoutSection = styled.section`
         color: ${(props) => props.theme.colors['purple-500']};
       }
     }
+
+    @media screen and (max-width: 1024px) {
+      flex-direction: column;
+    }
+  }
+
+  @media screen and (max-width: 1024px) {
+    h3 {
+      font-size: ${(props) => props.theme.fontSize.baloo.m}rem;
+      margin-top: 2rem;
+    }
+    .box {
+      max-width: 100%;
+      padding: 1.5rem !important;
+    }
   }
 `
 
@@ -48,6 +63,10 @@ export const InputContainer = styled.input<InputContainerProps>`
   border-radius: 0.25rem;
   border: 1px solid ${(props) => props.theme.colors['gray-400']};
   background: ${(props) => props.theme.colors['gray-300']};
+
+  @media screen and (max-width: 1024px) {
+    width: 100%;
+  }
 `
 
 export const InputsContainer = styled.div`
@@ -64,6 +83,10 @@ export const InputsContainer = styled.div`
 
   :focus {
     border: 1px solid ${(props) => props.theme.colors['yellow-900']};
+  }
+
+  @media screen and (max-width: 1024px) {
+    width: 100%;
   }
 `
 
@@ -88,6 +111,10 @@ export const Subtitle = styled.p`
 export const ButtonsList = styled.div`
   display: flex;
   gap: 0.75rem;
+
+  @media screen and (max-width: 1024px) {
+    flex-direction: column;
+  }
 `
 
 export const ButtonContainer = styled.button<ButtonContainerProps>`
@@ -121,12 +148,21 @@ export const ButtonContainer = styled.button<ButtonContainerProps>`
 
 export const SelectedCoffees = styled.div`
   width: 28rem;
+  margin-bottom: 4rem;
+
+  @media screen and (max-width: 1024px) {
+    width: 100%;
+  }
 `
 
 export const OrderResumeContainer = styled.div`
   padding: 2.5rem;
   border-radius: 0.375rem 2.75rem;
   background-color: ${(props) => props.theme.colors['gray-200']};
+
+  @media screen and (max-width: 1024px) {
+    padding: 1.5rem;
+  }
 `
 
 export const Summary = styled.div`
