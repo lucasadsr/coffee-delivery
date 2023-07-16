@@ -8,7 +8,7 @@ export const HeaderContainer = styled.header`
   top: 0px;
   left: 0px;
   z-index: 5;
-  background-color: white;
+  background-color: ${(props) => props.theme.colors['gray-100']};
   width: 100%;
 
   padding-block: 2rem;
